@@ -1,0 +1,109 @@
+# OncoRedFlag 红旗规则表 v0.0.3
+# 阈值已用公开权威指南核证（IDSA 2010 / NCI 患教 / ACS），核证明细见 rules/sources.md。
+#   status: validated             = 阈值直接来自所引指南原文
+#   status: validated-operational = 定性依据来自指南、数值为本工具保守操作化（引擎输出会加 source_note）
+#   （历史的 draft-pending-guideline-validation 已全部清除；新增规则须回到 draft 流程）
+#
+# 【唯一权威评估顺序】由 engine/triage.py 控制（与 triage.py docstring、SAFETY.md §3 必须一致）：
+#   1) 规范化输入   2) 通用急症 RED（任何人群）   3) 范围守门（人群）→ ESCALATE
+#   4) 专项 RED（化疗 0–21 天，优先于信息不足/窗口）   5) 关键信息缺失 → ESCALATE
+#   6) 窗口守门（化疗天数 <0 或 >21）→ ESCALATE   7) AMBER   8) NO_REDFLAG（不安抚）
+#
+# 条件键约定：后缀 _min => >= ，_max => <= ，无后缀 => 相等；
+#   同一条件 dict 内多键为 AND；triggers 列表元素之间为 OR；字段缺失(None)视为不匹配。
+
+meta:
+  version: "0.0.3"
+  scope: "成人实体瘤 · 细胞毒化疗后 0–21 天"
+  levels: [RED, AMBER, ESCALATE, NO_REDFLAG]
+  principle: "只判定'是否需要立即就医/联系治疗团队'，不诊断、不给居家处理替代就医、无 GREEN 级。"
+  evidence: "rules/sources.md（IDSA 2010 / NCI / ACS 实查核证 2026-06-24）"
+
+rules:
+  # ---------- 通用急症（任何人群，最高优先） ----------
+  - id: EMG-001
+    desc: 意识改变 / 反应迟钝 / 抽搐
+    applies_when: {}
+    triggers:
+      - {altered_consciousness: true}
+    level: RED
+    action: "意识改变属急症，请立即拨打 120 或前往最近急诊。"
+    source: acs_when_to_call
+    status: validated-operational   # 通用急救常识，癌症患教未单列但不降级
+
+  - id: EMG-002
+    desc: 气促 / 呼吸困难 / 胸痛 / 口唇发绀
+    applies_when: {}
+    triggers:
+      - {dyspnea: true}
+      - {chest_pain: true}
+      - {cyanosis: true}
+    level: RED
+    action: "呼吸困难/胸痛/口唇发绀可能危及生命，严重时先拨 120，并立即联系治疗团队/急诊。"
+    source: acs_when_to_call        # ACS: trouble breathing → call 911 first
+    status: validated
+
+  - id: EMG-003
+    desc: 活动性出血 / 呕血 / 黑便 / 大片瘀斑
+    applies_when: {}
+    triggers:
+      - {active_bleeding: true}
+      - {hematemesis_melena: true}
+    level: RED
+    action: "活动性出血/呕血/黑便需立即就医，请前往急诊或拨 120。"
+    source: acs_when_to_call        # ACS: bleeding/unexplained bruising, bloody stool
+    status: validated
+
+  # ---------- 细胞毒化疗 0–21 天 专项（applies_when 限定 0<=天数<=21） ----------
+  - id: FN-001
+    desc: 发热（化疗后 ≥38℃，疑似中性粒细胞减少性发热，急症）
+    applies_when: {treatment_type: cytotoxic_chemo, days_since_last_chemo_min: 0, days_since_last_chemo_max: 21}
+    triggers:
+      # IDSA 发热定义 ≥38.3 单次或 ≥38.0/1h；NCI 患教 ≥38℃ 即就医。本工具取单次 ≥38.0℃ 即 RED（更保守）。
+      - {temp_c_min: 38.0}
+    level: RED
+    action: "化疗后发热（≥38℃）属急症（疑似中性粒细胞减少性发热），请立即联系治疗团队或前往急诊，不要在家等待。"
+    source: idsa_fn_2010
+    status: validated
+
+  - id: FN-002
+    desc: 寒战 / 僵直（rigors），尤其伴中心静脉导管
+    applies_when: {treatment_type: cytotoxic_chemo, days_since_last_chemo_min: 0, days_since_last_chemo_max: 21}
+    triggers:
+      - {rigors: true}
+    level: RED
+    action: "寒战/发抖可能是严重感染的早期信号，请立即联系治疗团队或急诊。"
+    source: nci_infection           # NCI/ACS 感染征象含 chills / intense chills
+    status: validated
+
+  - id: GI-001
+    desc: 严重呕吐 / 腹泻致脱水风险
+    applies_when: {treatment_type: cytotoxic_chemo, days_since_last_chemo_min: 0, days_since_last_chemo_max: 21}
+    triggers:
+      - {vomiting_unable_intake_hours_min: 24}
+      - {diarrhea_count_per_day_min: 6}
+      - {diarrhea_bloody: true}
+    level: RED
+    action: "持续呕吐/腹泻有脱水与电解质紊乱风险，请尽快联系治疗团队或前往急诊。"
+    source: acs_when_to_call         # 定性: ACS long-lasting diarrhea/vomiting, bloody stool；数值为操作化(参 CTCAE)
+    status: validated-operational
+
+  - id: CVC-001
+    desc: 中心静脉导管（PICC/输液港）局部红肿热痛
+    applies_when: {treatment_type: cytotoxic_chemo, days_since_last_chemo_min: 0, days_since_last_chemo_max: 21}
+    triggers:
+      - {has_cvc: true, cvc_site_inflamed: true}
+    level: RED
+    action: "导管部位红肿/疼痛可能是导管相关感染，请尽快联系治疗团队。"
+    source: nci_infection           # NCI: swelling/redness where catheter enters; ACS: catheter site pain
+    status: validated
+
+  - id: AMB-001
+    desc: 低热 37.5–37.9℃（未达发热急症阈值，但化疗期不可忽视）
+    applies_when: {treatment_type: cytotoxic_chemo, days_since_last_chemo_min: 0, days_since_last_chemo_max: 21}
+    triggers:
+      - {temp_c_min: 37.5, temp_c_max: 37.9}
+    level: AMBER
+    action: "化疗期出现低热（37.5–37.9℃），请用口温规范复测并联系治疗团队咨询；一旦达到 38℃ 请立即就医。"
+    source: idsa_fn_2010            # 38.0 为指南就医阈值；37.5–37.9 为保守观察带（操作化）
+    status: validated-operational

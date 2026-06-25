@@ -1,0 +1,8 @@
+OncoRedFlag — 治疗期红旗信号核对与就医沟通助手
+Team Nightlight · 2026 小X宝开源医疗社区黑客松
+Copyright 2026 Team Nightlight
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+声明：本工具仅核对有限的危险信号，不诊断、不替代医护判断，也不是急救通道。
+阈值依据公开指南（IDSA 2010 / NCI / ACS，见 rules/sources.md），面向真实用户前需临床复核。

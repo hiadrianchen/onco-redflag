@@ -1,0 +1,28 @@
+# 自由文本 intake 的 LIVE 评测金标准（需真实 LLM，如 StepFun）。
+# 跑法：在 .env 填 STEPFUN_API_KEY 后 `python3 eval/run_intake_eval.py`（无 key 自动跳过）。
+# 安全口径：最看重"不漏判"——RED 必须判出 RED；超范围/缺信息判 ESCALATE。
+cases:
+  - text: 我爸化疗第7天，今天下午开始发烧38.5度，还有点发抖
+    expect: RED
+  - text: 化疗才5天，体温38.1已经持续快两个小时了
+    expect: RED
+  - text: 化疗后第3天突然一阵寒战发抖
+    expect: RED
+  - text: 化疗一周多，今天拉了7次肚子
+    expect: RED
+  - text: 化疗6天，吐得停不下来，一天多没法吃也没法喝水
+    expect: RED
+  - text: 化疗第5天，PICC置管的地方红肿还有点疼
+    expect: RED
+  - text: 化疗第8天，体温37.6，别的还好
+    expect: AMBER
+  - text: 化疗后两周，体温正常，也没别的不舒服
+    expect: NO_REDFLAG
+  - text: 化疗后一个多月了，发烧到38
+    expect: ESCALATE
+  - text: 发烧38.5，但记不清上次化疗是哪天了
+    expect: ESCALATE
+  - text: 免疫治疗后腹泻，一天七八次
+    expect: ESCALATE
+  - text: 我家孩子化疗后发高烧
+    expect: ESCALATE

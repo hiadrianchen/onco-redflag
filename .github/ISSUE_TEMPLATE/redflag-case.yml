@@ -1,0 +1,48 @@
+name: 虚构红旗案例贡献
+description: 提交一个【虚构】化疗期症状场景 + 期望判级，帮我们把安全测试集越织越密
+title: "[case] "
+labels: ["case-bank"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ **只接受虚构病例**。请勿提交任何真实患者身份或病历信息。
+        本工具不诊断、不替代急诊；危急请拨 120。被采纳的案例会并入 `tests/danger_cases.yaml` 并署名贡献者。
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 虚构病例描述
+      description: 用自然语言描述一个虚构的化疗期症状场景
+      placeholder: 例如：成人实体瘤，化疗第 7 天，口温 38.5℃，伴寒战
+    validations:
+      required: true
+  - type: dropdown
+    id: expect
+    attributes:
+      label: 你认为应判
+      options:
+        - RED（立即就医/联系治疗团队）
+        - AMBER（复测 + 联系治疗团队）
+        - ESCALATE（超范围/信息不足，升级就医）
+        - NO_REDFLAG（未触发红旗，但不代表安全）
+    validations:
+      required: true
+  - type: input
+    id: fields
+    attributes:
+      label: 结构化字段（可选，便于直接进测试集）
+      placeholder: treatment_type=cytotoxic_chemo, days_since_last_chemo=7, temp_c=38.5, rigors=true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: 依据 / 引用
+      description: 为什么是这个判级？尽量附权威指南（IDSA / NCI / ACS / CSCO 等）出处
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 我确认这是**虚构病例**，不含任何真实患者身份或病历信息
+          required: true
+        - label: 我理解本工具不提供诊断、不替代医护判断
+          required: true

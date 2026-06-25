@@ -1,0 +1,21 @@
+# 本地 evidence pack —— evidence-lookup 的 local provider 数据源。
+# 内容摘自 rules/sources.md 实查核证的公开指南；KnowS provider 启用后作为动态补充。
+# 按 source key 索引（与 redflags.yaml 的 source 对齐）。
+
+idsa_fn_2010:
+  - title: "IDSA 中性粒细胞减少肿瘤患者抗菌药物使用临床实践指南（2010 更新）"
+    publisher: "Clin Infect Dis. 2011;52(4):e56–e93 (Freifeld AG, et al.)"
+    url: "https://academic.oup.com/cid/article/52/4/e56/382256"
+    snippet: "发热定义：单次口温 ≥38.3℃(101°F) 或 ≥38.0℃(100.4°F) 持续 1 小时；中性粒细胞减少 ANC<500。"
+
+nci_infection:
+  - title: "Infection and Neutropenia during Cancer Treatment（患者教育）"
+    publisher: "National Cancer Institute (cancer.gov)"
+    url: "https://www.cancer.gov/about-cancer/treatment/side-effects/infection"
+    snippet: "体温 ≥100.5°F(38℃) 或寒战、导管处红肿、血尿等感染征象需联系治疗团队；感染可危及生命，需紧急处理。"
+
+acs_when_to_call:
+  - title: "Chemotherapy Side Effects（何时联系治疗团队 / 急救）"
+    publisher: "American Cancer Society (cancer.org)"
+    url: "https://www.cancer.org/cancer/managing-cancer/treatment-types/chemotherapy/chemotherapy-side-effects.html"
+    snippet: "呼吸困难/气促请先拨 911；发热（通常 ≥100.5–101°F 口温）、出血或不明瘀斑、持续腹泻呕吐、血便、导管处疼痛需联系治疗团队。"

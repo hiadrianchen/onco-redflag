@@ -1,0 +1,119 @@
+# 危险案例回归 —— 每次改 rules/redflags.yaml 或 triage.py 都必须全过。
+# 含"反例 + 脏输入 + 边界"，专门防止"把该急诊的人放回家"的漏判。
+# expect = 期望判级；expect_rule 可选，校验命中的具体规则。
+cases:
+  # ---- 在窗专项 RED ----
+  - name: 化疗后第7天高热38.5
+    expect: RED
+    expect_rule: FN-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 7, temp_c: 38.5, temp_route: oral}
+
+  - name: 化疗后38.1时长未知（不得降级AMBER）
+    expect: RED
+    expect_rule: FN-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 10, temp_c: 38.1}
+
+  - name: 化疗后寒战（体温未知）
+    expect: RED
+    expect_rule: FN-002
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 5, rigors: true}
+
+  - name: 化疗后腹泻8次
+    expect: RED
+    expect_rule: GI-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 8, diarrhea_count_per_day: 8}
+
+  - name: 化疗后呕吐30小时无法进食
+    expect: RED
+    expect_rule: GI-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 8, vomiting_unable_intake_hours: 30}
+
+  - name: 输液港红肿（体温正常）
+    expect: RED
+    expect_rule: CVC-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 6, has_cvc: true, cvc_site_inflamed: true, temp_c: 37.0}
+
+  # ---- 通用急症（任何人群） ----
+  - name: 意识改变
+    expect: RED
+    expect_rule: EMG-001
+    case: {altered_consciousness: true}
+
+  - name: 仅胸痛（无体温）
+    expect: RED
+    expect_rule: EMG-002
+    case: {chest_pain: true}
+
+  - name: 黑便/呕血
+    expect: RED
+    expect_rule: EMG-003
+    case: {hematemesis_melena: true}
+
+  # ---- 范围守门（人群） ----
+  - name: 免疫治疗腹泻（超范围）
+    expect: ESCALATE
+    expect_rule: ESC-SCOPE
+    case: {treatment_type: immunotherapy, days_since_last_chemo: 5, diarrhea_count_per_day: 8, temp_c: 37.2}
+
+  - name: 儿童化疗发热（超范围）
+    expect: ESCALATE
+    expect_rule: ESC-SCOPE
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 5, temp_c: 38.5, age: 10}
+
+  - name: 血液肿瘤患者发热（超范围，优先于专项RED）
+    expect: ESCALATE
+    expect_rule: ESC-SCOPE
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 7, temp_c: 38.5, patient_group: hematologic}
+
+  # ---- 信息缺失 ----
+  - name: 发热但化疗日期未知（信息不足）
+    expect: ESCALATE
+    expect_rule: ESC-INFO
+    case: {treatment_type: cytotoxic_chemo, temp_c: 38.5}
+
+  - name: 化疗天数脏输入无法解析（信息不足）
+    expect: ESCALATE
+    expect_rule: ESC-INFO
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: "七天前", temp_c: 38.5}
+
+  # ---- 窗口守门（核心修复：超窗发热绝不能 NO_REDFLAG） ----
+  - name: 化疗第30天发热38.5（超窗，曾被误判NO_REDFLAG）
+    expect: ESCALATE
+    expect_rule: ESC-WINDOW
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 30, temp_c: 38.5}
+
+  - name: 化疗第22天发热（刚超窗）
+    expect: ESCALATE
+    expect_rule: ESC-WINDOW
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 22, temp_c: 38.5}
+
+  - name: 化疗天数为负（日期异常）
+    expect: ESCALATE
+    expect_rule: ESC-WINDOW
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: -3, temp_c: 38.5}
+
+  - name: 化疗第30天无症状体温正常（超窗亦升级，不再NO_REDFLAG）
+    expect: ESCALATE
+    expect_rule: ESC-WINDOW
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 30, temp_c: 36.8}
+
+  # ---- 脏输入强转（不得崩溃，且不得漏判） ----
+  - name: 体温字符串"38.5"（脏输入仍应RED）
+    expect: RED
+    expect_rule: FN-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 7, temp_c: "38.5"}
+
+  - name: 寒战布尔字符串"true"（脏输入仍应RED）
+    expect: RED
+    expect_rule: FN-002
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 5, rigors: "true"}
+
+  # ---- AMBER / NO_REDFLAG（合法可达路径） ----
+  - name: 化疗期低热37.7
+    expect: AMBER
+    expect_rule: AMB-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 8, temp_c: 37.7, temp_route: oral}
+
+  - name: 在窗信息齐无任何红旗（合法NO_REDFLAG）
+    expect: NO_REDFLAG
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 8, temp_c: 36.8}
