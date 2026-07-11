@@ -28,7 +28,7 @@ rules:
       - {altered_consciousness: true}
     level: RED
     action: "意识改变属急症，请立即拨打 120 或前往最近急诊。"
-    source: acs_when_to_call
+    source: acs_when_to_call        # ACS《何时联系治疗团队/急救》通用框架；意识改变属通用急救常识
     status: validated-operational   # 通用急救常识，癌症患教未单列但不降级
 
   - id: EMG-002
@@ -40,7 +40,7 @@ rules:
       - {cyanosis: true}
     level: RED
     action: "呼吸困难/胸痛/口唇发绀可能危及生命，严重时先拨 120，并立即联系治疗团队/急诊。"
-    source: acs_when_to_call        # ACS: trouble breathing → call 911 first
+    source: acs_resp_emergency      # 症状簇拆分：ACS「呼吸困难→先拨 911」专属循证（见 sources.md §2）
     status: validated
 
   - id: EMG-003
@@ -51,7 +51,7 @@ rules:
       - {hematemesis_melena: true}
     level: RED
     action: "活动性出血/呕血/黑便需立即就医，请前往急诊或拨 120。"
-    source: acs_when_to_call        # ACS: bleeding/unexplained bruising, bloody stool
+    source: acs_bleeding            # 症状簇拆分：ACS/NCI 出血·血便·血尿专属循证（见 sources.md §2）
     status: validated
 
   # ---------- 细胞毒化疗 0–21 天 专项（applies_when 限定 0<=天数<=21） ----------
@@ -85,7 +85,7 @@ rules:
       - {diarrhea_bloody: true}
     level: RED
     action: "持续呕吐/腹泻有脱水与电解质紊乱风险，请尽快联系治疗团队或前往急诊。"
-    source: acs_when_to_call         # 定性: ACS long-lasting diarrhea/vomiting, bloody stool；数值为操作化(参 CTCAE)
+    source: nccn_gi_management       # 症状簇拆分：消化道(腹泻/呕吐)专属循证；定性 ACS/NCI，数值操作化(参 CTCAE)
     status: validated-operational
 
   - id: CVC-001

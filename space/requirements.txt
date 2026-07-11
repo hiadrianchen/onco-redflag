@@ -1,2 +1,6 @@
-gradio>=4.0
+# 魔搭创空间基础镜像默认面向 gradio 6.x；本 app 按 gradio 4.44 验证(适老化 css 走 Blocks(css=))，
+# 故钉 4.44.0 并补 huggingface_hub(4.44 依赖已被新版删除的 HfFolder)。本地纯跑 gradio==4.44.0 即可。
+gradio==4.44.0
+gradio_client==1.3.0
+huggingface_hub==0.25.2
 pyyaml>=6.0

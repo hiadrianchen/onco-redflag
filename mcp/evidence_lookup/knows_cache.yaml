@@ -1,0 +1,240 @@
+# 构建期预抓的 KnowS 判证引用缓存（vendored，入仓）。请用 prefetch_verdict_cache.py 重新生成，勿手改。
+_meta:
+  generated_at: '2026-06-29 10:26:26'
+  note: 构建期预抓的 KnowS 判证引用（vendored，离线即时）。判级不依赖本缓存；缓存仅供判证展示与离线保底。citations=指南(权威)，papers=研究文献含可点开
+    doi+摘要佐证(非指南)。刷新：重跑 prefetch_verdict_cache.py。
+  source: KnowS ai_search_guide + ai_search_paper_cn
+  refresh_owner: claude-code（有爱无恙循证维护）
+  refresh_cadence: 每次改 redflags.yaml 的 source/TOPIC_QUERY 后，或距 generated_at >90 天，重跑
+    prefetch 并 review diff
+topics:
+  idsa_fn_2010:
+    query: 化疗后 中性粒细胞减少性发热 何时就医 处理 指南 共识
+    citations:
+    - guideline: 癌症患者化疗诱导的中性粒细胞减少的管理：意大利医学肿瘤学协会（AIOM）2019年指南
+      org: 意大利肿瘤医学协会
+      year: 2020
+      publish_date: '2020-06-15'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: d3491501e5d2498ab26bcec9511efe02
+    - guideline: 发热性中性粒细胞减少症的治疗ABHH共识
+      org: 巴西血液学、输血和细胞治疗协会
+      year: 2024
+      publish_date: '2024-12-17'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: 1c7af55ddfb64d3ebbb7089af8984e02
+    papers:
+    - guideline: 肿瘤化疗导致的中性粒细胞减少诊治中国专家共识(2023版)
+      org: 中华肿瘤杂志
+      year: 2024
+      publish_date: '2024-07-16'
+      snippet: 肿瘤化疗导致的中性粒细胞减少是化疗常见的血液学不良事件和剂量限制性不良反应。化疗导致的中性粒细胞减少有可能导致化学药物减量或延迟、粒细胞减少性发热和严重的感染，从而增加治疗费用、降低化疗效果、甚至会导致危及生命的并发症。因此，正确评估患者发生中性粒细胞减少的风险，早期识别粒细胞减少性发热和感染并进行合理的预防和治疗，对减少化疗所致中性粒细胞减少相关并发症、提高患者治疗安全及抗肿瘤化学治疗的疗效等方面具有重要意义。基于循证医学证据和专家共识，中国抗癌协会肿瘤临床化疗专业委员会和…
+      url: https://doi.org/10.3760/cma.j.cn112152-20230224-00076
+      doi: 10.3760/cma.j.cn112152-20230224-00076
+      source: knows_paper
+      knows_source_id: 223bc2baceec4582aa904d76fcfde2e1
+    - guideline: 肿瘤化疗导致的中性粒细胞减少诊治专家共识(2019年版)
+      org: 中国医学前沿杂志（电子版）
+      year: 2020
+      publish_date: '2020-01-04'
+      snippet: 肿瘤化疗导致的中性粒细胞减少是化疗常见的不良反应,其可能导致化疗药物剂量减少、化疗时间延迟甚至粒细胞减少性发热(febrile neutropenia,FN)和感染,从而增加治疗费用、降低化疗效果和生存质量,影响患者预后.正确评估化疗导致中性粒细胞减少的发生风险,早期识别FN和感染,进行合理的预防和治疗,对提高抗肿瘤治疗整体疗效、降低死亡风险等具有重要意义.基于相关循证医学证据和专家共识,中国抗癌协会肿瘤临床化疗专业委员会和肿瘤支持治疗专业委员会制订了《肿瘤化疗导致的中性粒细…
+      url: https://doi.org/10.12037/YXQY.2019.12-11
+      doi: 10.12037/YXQY.2019.12-11
+      source: knows_paper
+      knows_source_id: d5778d934b304e0aa7ecffea5766c3ae
+  nci_infection:
+    query: 化疗 中性粒细胞减少 感染 发热 中心静脉导管 PICC 输液港 处理 指南
+    citations:
+    - guideline: 中国临床肿瘤学会(CSCO)肿瘤放化疗相关中性粒细胞减少症规范化管理指南(2021)
+      org: 中国临床肿瘤学会
+      year: 2021
+      publish_date: '2021-01-01'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: 2d70344c675541328133e90578f8ddaa
+    - guideline: 发热性中性粒细胞减少症的治疗ABHH共识
+      org: 巴西血液学、输血和细胞治疗协会
+      year: 2024
+      publish_date: '2024-12-17'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: 91de69e13419480aa7831857ff2bcbcc
+    papers:
+    - guideline: 亚太地区中性粒细胞减少伴不明原因发热治疗指南解读
+      org: 中国实用内科杂志
+      year: 2007
+      publish_date: '2007-12-03'
+      snippet: 篇首： 全球范围内由于恶性肿瘤而接受放化疗的患者中中性粒细胞减少(粒减)极其常见,不明原因的发热常常是这些患者感染时的惟一征象.在未获得病原学证据之前必须争分夺秒地开始经验性抗感染治疗,以控制病情,降低重症感染的病死率.
+      url: https://doi.org/10.3969/j.issn.1005-2194.2007.20.002
+      doi: 10.3969/j.issn.1005-2194.2007.20.002
+      source: knows_paper
+      knows_source_id: b242d26d79654751afeeee0845cee0bb
+    - guideline: 化疗后中性粒细胞缺乏白血病患者医院感染的护理进展
+      org: 护理学报
+      year: 2011
+      publish_date: '2011-11-15'
+      snippet: 篇首： 中性粒细胞减少是白血病化疗患者导致感染最重要的原因,中性粒细胞减少是指外周血中性粒细胞绝对值计数<1.0×109/L;当<0.5×109/L称中性粒细胞缺乏;<0.1×109/L时为严重中性粒细胞缺乏.据报道恶性血液病患者化疗后中性粒细胞的绝对值低于0.5×109/L且持续1周以上几乎100%都发生感染,并多具有双重感染,易致患者死亡等特点[
+        1 ].因此对化疗后中性粒细胞缺乏的患者应采取积极的对症治疗及保护性隔离,从而达到及时、有效地控制感染的目的.本文就化疗后中性…
+      url: https://doi.org/10.3969/j.issn.1008-9969.2011.17.008
+      doi: 10.3969/j.issn.1008-9969.2011.17.008
+      source: knows_paper
+      knows_source_id: 0a7e5c4f56cc4267b68c3222bee79a20
+  acs_when_to_call:
+    query: 化疗 不良反应 何时就医 急症 处理 指南 共识
+    citations: []
+  nccn_gi_management:
+    query: 化疗相关 腹泻 呕吐 恶心 管理 指南 共识
+    citations:
+    - guideline: 中国肿瘤药物治疗相关恶心呕吐防治专家共识（2022年版）
+      org: 中国抗癌协会肿瘤支持治疗专业委员会；中国抗癌协会肿瘤临床化疗专业委员会
+      year: 2022
+      publish_date: '2022-10-25'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: d3f4cec4116c4fd7a49065c6aedec325
+    - guideline: 四川省防控抗肿瘤药物治疗相关恶心呕吐专家共识2024版
+      org: KnowS 指南库
+      year: 2024
+      publish_date: '2024-10-25'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: 95aecc8ce30f41d88772823dcb8bcd4e
+    - guideline: 化疗相关腹泻全程管理中国专家共识
+      org: 福建省抗癌协会癌痛专业委员会；中国抗癌协会癌症康复与姑息治疗专业委员会
+      year: 2025
+      publish_date: '2025-07-15'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: 799b395b92924e738a61f4f8d24da0b9
+    papers:
+    - guideline: 化疗所致恶心呕吐全程管理上海专家共识(2018年版)
+      org: 中国癌症杂志
+      year: 2019
+      publish_date: '2019-01-19'
+      snippet: 恶性肿瘤患者出现脑转移、并发肠梗阻和水电解质紊乱,或给予手术、化疗、放疗、分子靶向治疗等抗肿瘤治疗以及癌痛药物控制过程中都可能引发肿瘤患者的恶心呕吐.其中,化疗所致恶心呕吐(chemotherapy-induced
+        nausea and vomiting,CINV)是最常见的化疗不良反应,易造成代谢紊乱、营养失调及体重减轻,对患者的情感、社会和体力功能都会产生明显的负面影响,更是患者畏惧化疗、生活质量下降和依从性下降的重要原因之一.
+      url: https://doi.org/10.19401/j.cnki.1007-3639.2018.12.011
+      doi: 10.19401/j.cnki.1007-3639.2018.12.011
+      source: knows_paper
+      knows_source_id: fb05a60d329f41f1bf482a4754614bf1
+    - guideline: 化疗所致恶心呕吐中西医诊治专家共识
+      org: 中国医院用药评价与分析
+      year: 2024
+      publish_date: '2024-01-23'
+      snippet: 化疗所致恶心呕吐是肿瘤患者化疗所产生的最常见且令人畏惧的不良反应.为了对其进行更加规范、科学、合理的诊治,重庆市医学会肿瘤学分会中西医肿瘤整合与协同创新学组专家组成员参照国内外临床指南和文献报道,以传统中医辨证论治为基本点,结合循证医学原理,经过反复讨论和修改,形成了《化疗所致恶心呕吐中西医诊治专家共识》.该共识详细阐述了化疗所致恶心呕吐的中西医诊断标准和规范化治疗模式,为肿瘤科医师科学、规范地诊治化疗所致恶心呕吐提供了参考.
+      url: https://doi.org/10.14009/j.issn.1672-2124.2023.12.001
+      doi: 10.14009/j.issn.1672-2124.2023.12.001
+      source: knows_paper
+      knows_source_id: 2387aa21e34b4f89bfb4bfaa36d7e2a5
+  onco_nutrition:
+    query: 肿瘤 化疗 患者 营养不良 恶液质 营养治疗 食欲 膳食 蛋白质 专家共识 指南
+    citations:
+    - guideline: 肿瘤患者食欲下降的营养诊疗专家共识
+      org: 中国抗癌协会肿瘤营养专业委员会
+      year: 2022
+      publish_date: '2022-01-01'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: d0b2ddabaa534a67929e276ca3893da2
+    - guideline: 肿瘤恶液质患者的营养治疗专家共识
+      org: 中国抗癌协会肿瘤营养与支持治疗专业委员会
+      year: 2024
+      publish_date: '2024-08-09'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: d5800e649bf6456eb8df3fd2045eb287
+    papers:
+    - guideline: 肿瘤患者食欲下降的营养诊疗专家共识
+      org: 肿瘤代谢与营养电子杂志
+      year: 2022
+      publish_date: '2022-06-21'
+      snippet: 由于肿瘤本身及手术、放化疗等治疗因素影响,肿瘤患者常出现食欲下降.食欲下降导致的营养摄入不足易引起营养不良和恶液质,可使肿瘤患者对抗肿瘤治疗的耐受性及疗效降低、生活质量下降,严重影响患者生存预后.在病程中准确评估患者食欲,结合营养筛查与评估,尽早发现患者营养风险并给予个体化的营养治疗,有利于改善患者食欲与营养状况、预防或延缓病程进展、提高治疗耐受性,对于改善患者的预后及生活质量具有积极意义.为规范肿瘤患者食欲下降的营养诊疗,提高救治效果,本共识根据国内外现有研究成果,综合有关…
+      url: https://doi.org/10.16689/j.cnki.cn11-9349/r.2022.03.007
+      doi: 10.16689/j.cnki.cn11-9349/r.2022.03.007
+      source: knows_paper
+      knows_source_id: ec35f73383e040dfaa412f06e444c581
+    - guideline: 恶性肿瘤放疗患者营养治疗专家共识
+      org: 肿瘤代谢与营养电子杂志
+      year: 2019
+      publish_date: '2019-09-25'
+      snippet: 营养不良在恶性肿瘤放疗患者中发生率高,降低治疗疗效,增加治疗副反应,因此应该对放疗患者常规进行营养风险筛查(推荐采用NRS 2002量表)和营养评估(推荐采用PG-SGA量表).恶性肿瘤放疗患者在"围放疗期"需要进行全程营养管理.放疗前需根据PG-SGA评分,放疗中需根据PG-SGA评分和RTOG急性放射损伤分级,放疗后需根据PG-SGA评分和RTOG晚期放射损伤分级,规范化、个体化选择营养治疗方式.营养治疗方式遵循"五阶梯模式".肠内营养途径选择遵循"四阶梯模式".当患者无…
+      url: https://doi.org/10.16689/j.cnki.cn11-9349/r.2018.04.008
+      doi: 10.16689/j.cnki.cn11-9349/r.2018.04.008
+      source: knows_paper
+      knows_source_id: e61673b6d2fe467591feb27a1a568fe3
+  acs_resp_emergency:
+    query: 肿瘤 化疗 呼吸困难 气促 胸痛 急症 处理 指南 共识
+    citations:
+    - guideline: 肿瘤重症患者急性呼吸衰竭专家共识(2023版)
+      org: 北京肿瘤学会重症医学专业委员会
+      year: 2023
+      publish_date: '2023-01-01'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: bf68f6d68224402fae5cfef747a59adc
+    papers:
+    - guideline: 肿瘤重症患者急性呼吸衰竭专家共识(2023版)
+      org: 中国医学科学杂志（英文版）
+      year: 2023
+      publish_date: '2023-10-31'
+      snippet: 目的 本共识的制定旨在为肿瘤重症患者合并呼吸衰竭的临床处理中常见问题提供基于临床证据的推荐意见.方法 采用人群、干预、比较和预后(Population,Intervention,Comparison,and
+        Outcome,PICO)原则对肿瘤重症患者呼吸衰竭的诊断和处理提出6个重要临床问题,基于文献检索和证据整合形成推荐意见.采用推荐意见分级评价、制定与评估(Grading
+        of Recommendation Assessment,Development and Evalu…
+      url: https://doi.org/10.24920/004203
+      doi: 10.24920/004203
+      source: knows_paper
+      knows_source_id: ab570b03ae0746b7bc30f89df8d7913d
+    - guideline: 《晚期癌症患者呼吸困难处理:美国临床肿瘤学会指南》解读
+      org: 协和医学杂志
+      year: 2024
+      publish_date: '2024-02-23'
+      snippet: 摘要： 呼吸困难是一种自觉症状,其给晚期癌症患者带来了巨大痛苦.有效评估和处理晚期癌症患者的呼吸困难是一线临床医生和专业护理人员应具备的核心能力,中国目前尚缺乏此方面的规范处理流程.基于循证医学证据,美国临床肿瘤学会发布了"晚期癌症呼吸困难处理实践指南",该指南针对晚期癌症患者给出了呼吸困难评估和分级处理策略.本文结合中国国情,旨在对该指南中的关键内容进行详细解读,以期为中国的临床实践提供指导和借鉴.
+        更多
+      url: https://doi.org/10.12290/xhyxzz.2023-0517
+      doi: 10.12290/xhyxzz.2023-0517
+      source: knows_paper
+      knows_source_id: b0ca5deb51424bfa9baad92542c515b0
+  acs_bleeding:
+    query: 肿瘤 化疗 出血 血小板减少 消化道出血 止血 处理 指南 共识
+    citations:
+    - guideline: 肿瘤合并肝损伤患者血小板减少症管理中国专家共识(2022版)
+      org: 中国抗癌协会
+      year: 2023
+      publish_date: '2023-01-01'
+      has_pdf: true
+      url: ''
+      source: knows
+      knows_source_id: cdc3fdf740994e888a337d3ceef1e16c
+    papers:
+    - guideline: 肿瘤化疗所致血小板减少症诊疗中国专家共识(2014版)
+      org: 中华肿瘤杂志
+      year: 2015
+      publish_date: '2015-01-07'
+      snippet: 肿瘤化疗所致血小板减少症(Chemotherapy-induced thrombocytopenia,CIT)是临床常见的化疗药物剂量限制性毒性反应,有可能导致降低化疗药物剂量或延迟化疗时间,甚至终止化疗,由此影响临床疗效和患者生存,并增加医疗费用[1].为提高CIT诊治水平,促进血小板生长因子在实体瘤领域的合理用药,中国抗癌协会临床肿瘤学协作专业委员会(CSCO)根据中国国情,在参考国内外相关循证医学证据以及相关共识及指南的基础上,于2012年、2013年全国临床肿瘤学大会…
+      url: https://doi.org/10.3760/cma.j.issn.0253-3766.2014.11.016
+      doi: 10.3760/cma.j.issn.0253-3766.2014.11.016
+      source: knows_paper
+      knows_source_id: 3ed7816b0dda47ffaaed59665557d0df
+    - guideline: 肿瘤化疗所致血小板减少症诊疗中国专家共识( 2018版)
+      org: 中华肿瘤杂志
+      year: 2018
+      publish_date: '2018-10-16'
+      snippet: 肿瘤化疗所致血小板减少症(CIT)是肿瘤化疗中常见的毒副反应,有可能导致化疗药物剂量降低或化疗时间延迟,甚至需要血小板输注,因而增加患者的治疗费用、降低化疗效果和患者的生活质量、缩短生存时间.
+        CIT的主要治疗包括输注血小板、重组人血小板生成素( rhTPO)和重组人白细胞介素11(rhIL-11). rhIL-11是最早上市的血小板生成细胞因子.
+        IL-11已被证实对治疗血小板减少症有效. rhTPO是c-Mpl配体的一种重组形式,是全长糖化的TPO. rhTPO对化疗前和…
+      url: https://doi.org/10.3760/cma.j.issn.0253-3766.2018.09.014
+      doi: 10.3760/cma.j.issn.0253-3766.2018.09.014
+      source: knows_paper
+      knows_source_id: 67b8b40642a24b25b74689b5f3148673

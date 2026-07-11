@@ -12,6 +12,8 @@ jobs:
         run: pip install pyyaml
       - name: danger-case regression
         run: python tests/test_triage.py
+      - name: evidence provider contract (KnowS ok/timeout/empty)
+        run: python tests/test_evidence_contract.py
       - name: end-to-end pipeline smoke
         run: python tests/test_pipeline.py
       - name: MCP server handshake smoke

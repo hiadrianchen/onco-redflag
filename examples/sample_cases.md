@@ -1,7 +1,7 @@
 # 示例输入输出（均为虚构病例）
 
 > 输出由 `python3 engine/triage.py` 实际生成（确定性引擎）。完整判级矩阵见
-> `tests/danger_cases.yaml`（**22 例回归，全过**，含反例/脏输入/边界）。
+> `tests/danger_cases.yaml`（**38 例回归，全过**，含反例/脏输入/边界）。
 > **示例一律用虚构病例，不含真实身份/病历。** 阈值已用公开指南核证（见 `rules/sources.md`）；
 > `validated` 来源不带 note，`validated-operational`（如 GI/低热）会带"数值为保守操作化"提示。
 

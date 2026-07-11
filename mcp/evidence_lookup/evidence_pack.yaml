@@ -14,8 +14,39 @@ nci_infection:
     url: "https://www.cancer.gov/about-cancer/treatment/side-effects/infection"
     snippet: "体温 ≥100.5°F(38℃) 或寒战、导管处红肿、血尿等感染征象需联系治疗团队；感染可危及生命，需紧急处理。"
 
+# acs_when_to_call —— 通用「何时联系治疗团队/急救」框架（EMG-001 意识改变等通用急症）。
+# 注：按症状簇已拆出 acs_resp_emergency / acs_bleeding / nccn_gi_management 三个专属来源（见下，与 sources.md §2 对齐）。
 acs_when_to_call:
   - title: "Chemotherapy Side Effects（何时联系治疗团队 / 急救）"
     publisher: "American Cancer Society (cancer.org)"
     url: "https://www.cancer.org/cancer/managing-cancer/treatment-types/chemotherapy/chemotherapy-side-effects.html"
-    snippet: "呼吸困难/气促请先拨 911；发热（通常 ≥100.5–101°F 口温）、出血或不明瘀斑、持续腹泻呕吐、血便、导管处疼痛需联系治疗团队。"
+    snippet: "ACS 列出多种需立即联系治疗团队的危险信号；危及生命（如呼吸困难）先拨 911。意识改变/抽搐属通用急救范畴，立即拨 120。"
+
+# 症状簇：呼吸/循环急症（EMG-002 气促/胸痛/发绀）。
+acs_resp_emergency:
+  - title: "Chemotherapy Side Effects — 呼吸困难（先拨 911）"
+    publisher: "American Cancer Society (cancer.org)"
+    url: "https://www.cancer.org/cancer/managing-cancer/treatment-types/chemotherapy/chemotherapy-side-effects.html"
+    snippet: "Shortness of breath or trouble breathing（If you're having trouble breathing, call 911 first）。胸痛、口唇发绀按危及生命急症同级处理。"
+
+# 症状簇：出血急症（EMG-003 活动性出血/呕血/黑便/血尿）。
+acs_bleeding:
+  - title: "Chemotherapy Side Effects — 出血/瘀斑/血便血尿"
+    publisher: "American Cancer Society (cancer.org)"
+    url: "https://www.cancer.org/cancer/managing-cancer/treatment-types/chemotherapy/chemotherapy-side-effects.html"
+    snippet: "Bleeding or unexplained bruising；Bloody stool or blood in your urine —— 出血或不明原因瘀斑、血便/血尿需立即联系治疗团队。"
+  - title: "Infection and Neutropenia during Cancer Treatment — 血尿等征象"
+    publisher: "National Cancer Institute (cancer.gov)"
+    url: "https://www.cancer.gov/about-cancer/treatment/side-effects/infection"
+    snippet: "血尿（urine that is bloody）等征象需联系治疗团队；化疗期出血风险（血小板减少）不可在家拖延。"
+
+# 症状簇：消化道脱水（GI-001 严重呕吐/腹泻）。定性依据 ACS/NCI，数值阈值参 CTCAE 操作化。
+nccn_gi_management:
+  - title: "Chemotherapy Side Effects — 持续腹泻/呕吐、血便"
+    publisher: "American Cancer Society (cancer.org)"
+    url: "https://www.cancer.org/cancer/managing-cancer/treatment-types/chemotherapy/chemotherapy-side-effects.html"
+    snippet: "Long-lasting diarrhea or vomiting；Bloody stool —— 持续腹泻或呕吐、血便需联系治疗团队（有脱水/电解质紊乱风险）。"
+  - title: "Infection and Neutropenia during Cancer Treatment — 腹泻征象"
+    publisher: "National Cancer Institute (cancer.gov)"
+    url: "https://www.cancer.gov/about-cancer/treatment/side-effects/infection"
+    snippet: "腹泻（diarrhea）列为需联系治疗团队的征象之一；化疗期持续呕吐腹泻应尽快就医评估脱水。"

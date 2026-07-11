@@ -117,3 +117,86 @@ cases:
   - name: 在窗信息齐无任何红旗（合法NO_REDFLAG）
     expect: NO_REDFLAG
     case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 8, temp_c: 36.8}
+
+  # ---- 优先级红线：通用急症先于"超范围/缺信息"（绝不被降级，最关键的漏判防线） ----
+  - name: 免疫治疗+意识改变（通用急症须先于超范围，仍RED不得ESCALATE）
+    expect: RED
+    expect_rule: EMG-001
+    case: {treatment_type: immunotherapy, days_since_last_chemo: 5, altered_consciousness: true}
+
+  - name: 儿童+呼吸困难（通用急症须先于超范围，仍RED）
+    expect: RED
+    expect_rule: EMG-002
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 5, age: 8, dyspnea: true}
+
+  - name: 血液肿瘤+活动性出血（通用急症须先于超范围，仍RED）
+    expect: RED
+    expect_rule: EMG-003
+    case: {patient_group: hematologic, active_bleeding: true}
+
+  - name: 仅活动性出血信息几近全缺（通用急症须先于信息不足，仍RED）
+    expect: RED
+    expect_rule: EMG-003
+    case: {active_bleeding: true}
+
+  # ---- 通用急症剩余触发器（每个 trigger 都要有反例守住） ----
+  - name: 仅呼吸困难（无体温）
+    expect: RED
+    expect_rule: EMG-002
+    case: {dyspnea: true}
+
+  - name: 仅口唇发绀
+    expect: RED
+    expect_rule: EMG-002
+    case: {cyanosis: true}
+
+  - name: 化疗后血性腹泻（次数未填，血便即RED）
+    expect: RED
+    expect_rule: GI-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 6, diarrhea_bloody: true}
+
+  # ---- 阈值边界（恰好等于阈值必须命中，不可差一格漏判） ----
+  - name: 发热恰好38.0（边界，须RED不得AMBER）
+    expect: RED
+    expect_rule: FN-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 7, temp_c: 38.0, temp_route: oral}
+
+  - name: 化疗第0天发热38.5（窗口下界在内，须RED）
+    expect: RED
+    expect_rule: FN-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 0, temp_c: 38.5}
+
+  - name: 化疗第21天发热38.5（窗口上界在内，须RED）
+    expect: RED
+    expect_rule: FN-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 21, temp_c: 38.5}
+
+  - name: 化疗后腹泻恰好6次（边界，须RED）
+    expect: RED
+    expect_rule: GI-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 8, diarrhea_count_per_day: 6}
+
+  - name: 低热恰好37.5（AMBER下界）
+    expect: AMBER
+    expect_rule: AMB-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 8, temp_c: 37.5, temp_route: oral}
+
+  - name: 低热恰好37.9（AMBER上界）
+    expect: AMBER
+    expect_rule: AMB-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 8, temp_c: 37.9, temp_route: oral}
+
+  - name: 在窗体温37.4信息齐（未达AMBER的合法NO_REDFLAG）
+    expect: NO_REDFLAG
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 8, temp_c: 37.4, temp_route: oral}
+
+  # ---- 非口温绝不下调风险（SAFETY.md §5：不可靠测量只提示、不降级） ----
+  - name: 腋温38.5发热（非口温仍须RED，不得因测量方式降级）
+    expect: RED
+    expect_rule: FN-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 7, temp_c: 38.5, temp_route: axillary}
+
+  - name: 耳温低热37.7（非口温仍按AMBER，不下调亦不漏判）
+    expect: AMBER
+    expect_rule: AMB-001
+    case: {treatment_type: cytotoxic_chemo, days_since_last_chemo: 8, temp_c: 37.7, temp_route: ear}
