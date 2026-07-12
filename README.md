@@ -1,7 +1,7 @@
 # 有爱无恙 · OncoRedFlag —— 化疗居家红旗信号核对与就医决策助手
 
 > **Team Nightlight** ｜ 2026 小X宝开源医疗社区黑客松（通用医学 / 肿瘤方向）
-> 🔗 魔搭创空间：<https://modelscope.cn/studios/AdrianChen/onco-redflag> ｜ 📄 License：Apache-2.0
+> 🔗 魔搭创空间：<https://modelscope.cn/studios/AdrianChen/onco-redflag> ｜ 📺 演示视频：<https://www.bilibili.com/video/BV1XWNM64EAA/> ｜ 📄 License：Apache-2.0
 
 ---
 
@@ -55,6 +55,8 @@
 
 ## 4. 演示与输入输出示例
 
+> 🎬 **演示视频（B站）**：[有爱无恙·化疗居家就医决策助手演示](https://www.bilibili.com/video/BV1XWNM64EAA/) —— 三分钟看完从"深夜 38 度慌不慌"到"要不要就医 + 循证依据"的完整交互。
+
 > 以下输出均由 `python3 engine/triage.py` 的确定性引擎实际生成，**病例一律虚构，不含任何真实身份/病历**。完整判级矩阵见 [`examples/sample_cases.md`](examples/sample_cases.md) 与 [`tests/danger_cases.yaml`](tests/danger_cases.yaml)（38 例回归，全过）。
 
 **① RED —— 化疗后第 7 天发烧 38.5、有点发抖**
@@ -86,7 +88,7 @@
             若症状持续/加重，或你有任何不放心，请联系治疗团队。
 ```
 
-> 四色结果卡与辟谣专区的实际观感建议在魔搭链接现场体验；如需静态截图可在演示材料中补充。
+> 四色结果卡与辟谣专区的实际观感，可看上方[演示视频](https://www.bilibili.com/video/BV1XWNM64EAA/)或到[魔搭链接](https://modelscope.cn/studios/AdrianChen/onco-redflag)现场体验。
 
 ## 5. 局限性与未来规划
 
